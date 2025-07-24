@@ -1,0 +1,66 @@
+﻿@using User_Admin_Approve_Core_ADO.Models
+@model AdminModel
+
+
+<style>
+    .logout-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+        .logout-container a {
+            background-color: #f44336; /* Red color */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .logout-container a:hover {
+                background-color: #d32f2f; /* Darker red on hover */
+            }
+
+</style>
+
+
+<div class="logout-container">
+    <a asp-controller="User" asp-action="Logout">Logout</a>
+</div>
+
+
+<div>
+    <table class="table  table-striped">
+        <tr>
+            <th colspan="2" align="justify">
+                <h3>WelCome @ViewBag.username !!  </h3>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                Your Phone No.:
+            </th>
+            <td>
+                @ViewBag.userphone
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Your email:
+            </th>
+            <td>
+                @ViewBag.useremail
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Your Address:
+            </th>
+            <td>
+                @ViewBag.useradd
+            </td>
+        </tr>
+    </table>
+</div>
+

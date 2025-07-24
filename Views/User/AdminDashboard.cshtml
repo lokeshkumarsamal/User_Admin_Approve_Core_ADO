@@ -1,0 +1,70 @@
+﻿@if (ViewBag.PendingUsers != null && ViewBag.PendingUsers.Count > 0)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Login ID</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th>Mail ID</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in ViewBag.PendingUsers)
+            {
+                <tr>
+                    <td>@user.userloginid</td>
+                    <td>@user.userpass</td>
+                    <td>@user.username</td> 
+                    <td>@user.userphone</td>
+                    <td>@user.useremail</td>
+                   
+                    <td id="status-@user.userloginid">
+                        @if (user.isapproved) 
+                        {
+                            <span class="text-success font-weight-bold">Approved</span>
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0);" onclick="ApproveUser('@user.userloginid');" class="text-primary font-weight-bold" style="text-decoration: none;">
+                                Approve
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+    function ApproveUser(userloginid) {
+        fetch('@Url.Action("ApproveUser")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userloginid: userloginid })
+        })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById(`status-${userloginid}`).innerHTML = '<span class="text-success font-weight-bold">Approved</span>';
+            } else {
+                alert('Failed to approve user.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>

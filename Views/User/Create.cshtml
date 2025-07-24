@@ -1,0 +1,34 @@
+﻿@using User_Admin_Approve_Core_ADO.Models
+@model User_Admin_Approve_Core_ADO.Models.AdminModel
+
+<form asp-action="Create">
+    <div>
+        <label>User Login ID:</label>
+        <input asp-for="userloginid" required />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input asp-for="userpass" type="password" required />
+    </div>
+    <div>
+        <label>Name:</label>
+        <input asp-for="username" required />
+    </div>
+    <div>
+        <label>Phone:</label>
+        <input asp-for="userphone" required />
+    </div>
+    <div>
+        <label>Email:</label>
+        <input asp-for="useremail" required />
+    </div>
+    <div>
+        <label>Address:</label>
+        <input asp-for="useradd" required />
+    </div>
+    <button type="submit">Register</button>
+</form>
+
+<div>
+    Already registered? <a asp-controller="User" asp-action="Login">Login</a>
+</div>
